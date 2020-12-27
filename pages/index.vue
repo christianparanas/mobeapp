@@ -6,14 +6,15 @@
         Find Movies, Tv shows and more ...
       </div>
       <div class="search-bar">
+        <svg class="search-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" ><path d="M10,18c1.846,0,3.543-0.635,4.897-1.688l4.396,4.396l1.414-1.414l-4.396-4.396C17.365,13.543,18,11.846,18,10 c0-4.411-3.589-8-8-8s-8,3.589-8,8S5.589,18,10,18z M10,4c3.309,0,6,2.691,6,6s-2.691,6-6,6s-6-2.691-6-6S6.691,4,10,4z"></path></svg>
         <input type="text" placeholder="Search" >
       </div>
       <div class="categories-slider-wrapper">
-        <div class="category active-cat">recommended</div>
-        <div class="category">recommended</div>
-        <div class="category">recommended</div>
-        <div class="category">recommended</div>
-        <div class="category">recommended</div>
+        <div class="category active-cat">Recommended</div>
+        <div class="category">Action</div>
+        <div class="category">War</div>
+        <div class="category">Fiction</div>
+        <div class="category">Anime</div>
       </div>
     </div>
   </div>
@@ -40,13 +41,21 @@ export default {}
       .search-bar {
         margin-top: 20px;
 
+        .search-icon {
+          position: relative;
+          bottom: -38px;
+          left: 10px;
+          fill: #718096;
+        }
+
         input {
           width: 100%;
           font-size: 13px;
-          padding: 15px;
+          padding: 15px 15px 15px 40px;
           border-radius: 12px;
           background-color: #1f2937;
           outline: none;
+          color: #a0aec0;
         }
       }
 
