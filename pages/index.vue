@@ -1,5 +1,5 @@
 <template>
-  <div class="container">
+  <div id="App" class="container">
     <Nav />
     <div class="content">
       <div class="header text-2xl">
@@ -19,20 +19,26 @@
         <div class="category">Anime</div>
       </div>
       <div class="category-content">
-        <div class="cat-con">content</div>
-        <div class="cat-con">content</div>
-        <div class="cat-con">content</div>
-        <div class="cat-con">content</div>
-        <div class="cat-con">content</div>
-        <div class="cat-con">content</div>
+        <ContentPreview v-for="content in contents.results" :content="content" :key="content.id" />
       </div>
     </div>
   </div>
 </template>
 
 <script>
-export default {}
+export default {
+  name: 'App',
+  async asyncData({ $http }) {
+    const contents = await $http.$get('https://api.themoviedb.org/3/trending/all/day?api_key=a807f0095433ac989503323b5b0bc933')
+    console.log(contents.results);
+    return {
+      contents,
+    }
+  }
+}
 </script>
+
+<!-- https://api.themoviedb.org/3/trending/all/day?api_key=a807f0095433ac989503323b5b0bc933 -->
 
 <style lang="scss">
   body {
@@ -94,21 +100,14 @@ export default {}
 
       .category-content {
         margin-top: 10px;
-        display: flex;
-        flex-direction: row;
+        display: grid;
+        grid-template-columns: repeat(20, 100px);
+        grid-column-gap: 5px;
         overflow-x: scroll;
 
         &::-webkit-scrollbar {
-          width: 0px;  /* Remove scrollbar space */
-          background: transparent;  /* Optional: just make scrollbar invisible */
-        }
-
-        .cat-con {
-          background-color: #1f2937;
-          padding: 10px 20px;
-          border-radius: 5px;
-          height: 140px;
-          margin-right: 10px;
+          width: 0px;
+          background: transparent;
         }
       } 
 
