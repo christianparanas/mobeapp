@@ -20,7 +20,7 @@
 		width: 100%;
 		display: grid;
 		grid-template-columns: 1fr 1fr 1fr;
-		padding: 30px;
+		padding: 20px;
 
 		.nv2 {
 			place-self: center;
