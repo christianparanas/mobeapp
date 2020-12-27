@@ -11,15 +11,35 @@
           <input type="text" placeholder="Search" >
         </form>
       </div>
-      <div class="categories-slider-wrapper">
+<!--       <div class="categories-slider-wrapper">
         <div class="category active-cat">Trending</div>
         <div class="category">Action</div>
         <div class="category">War</div>
         <div class="category">Fiction</div>
         <div class="category">Anime</div>
+      </div> -->
+      <div class="header-section">
+        <div class="">Trending Now</div>
+        <div class="">Explore</div>
       </div>
       <div class="category-content">
-        <ContentPreview v-for="content in contents.results" :content="content" :key="content.id" />
+        <ContentPreview v-for="trend in trends.results" :content="trend" :key="trend.id" />
+      </div>
+
+      <div class="header-section">
+        <div class="">Action Movies</div>
+        <div class="">Explore</div>
+      </div>
+      <div class="category-content">
+        <ContentPreview v-for="action in actionMovies.results" :content="action" :key="action.id" />
+      </div>
+
+      <div class="header-section">
+        <div class="">Comedies</div>
+        <div class="">Explore</div>
+      </div>
+      <div class="category-content">
+        <ContentPreview v-for="comedy in comedyMovies.results" :content="comedy" :key="comedy.id" />
       </div>
     </div>
   </div>
@@ -29,10 +49,16 @@
 export default {
   name: 'App',
   async asyncData({ $http }) {
-    const contents = await $http.$get('https://api.themoviedb.org/3/trending/all/day?api_key=a807f0095433ac989503323b5b0bc933')
-    console.log(contents.results);
+    const trends = await $http.$get('https://api.themoviedb.org/3/trending/all/day?api_key=a807f0095433ac989503323b5b0bc933');
+
+    const actionMovies = await $http.$get('https://api.themoviedb.org/3/discover/movie?api_key=a807f0095433ac989503323b5b0bc933&language=en-US&sort_by=popularity.asc&include_adult=false&include_video=false&page=1&with_genres=28');
+
+    const comedyMovies = await $http.$get('https://api.themoviedb.org/3/discover/movie?api_key=a807f0095433ac989503323b5b0bc933&language=en-US&sort_by=popularity.asc&include_adult=false&include_video=false&page=1&with_genres=35');
+
     return {
-      contents,
+      trends,
+      actionMovies,
+      comedyMovies
     }
   }
 }
@@ -74,27 +100,10 @@ export default {
         }
       }
 
-      .categories-slider-wrapper {
-        margin-top: 20px;
+      .header-section {
+        margin-top: 30px;
         display: flex;
-        flex-direction: row;
-        overflow-x: scroll;
-
-        .category {
-          background-color: #1f2937;
-          padding: 5px 10px;
-          margin-right: 10px;
-          border-radius: 5px;
-        }
-
-        &::-webkit-scrollbar {
-          width: 0px;  /* Remove scrollbar space */
-          background: transparent;  /* Optional: just make scrollbar invisible */
-        }
-
-        .active-cat {
-          background-color: #6B21A8;
-        }
+        justify-content: space-between;
       }
 
       .category-content {

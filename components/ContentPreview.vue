@@ -1,6 +1,6 @@
 <template>
-	<div id="ContentPreview" class="content-preview">
-		<img :src="image" alt="Hi">
+	<div id="ContentPreview" class="content-preview" v-if="havePoster">
+		<img :src="image" alt="image">
 	</div>
 </template>
 
@@ -11,8 +11,17 @@ export default {
    props: ['content'],
    data() {
    	return {
-   		image: `https://image.tmdb.org/t/p/w342/${this.content.poster_path}`,
+   		image: "",
+   		havePoster: true
    	}
+   },
+   mounted() {
+   	// checks if the movie have a poster, if not, it will not be rendered
+	if(this.content.poster_path == null) {
+		this.havePoster = false
+	} else {
+		this.image = `https://image.tmdb.org/t/p/w342/${this.content.poster_path}`
+	}
    }
 }
 </script>
