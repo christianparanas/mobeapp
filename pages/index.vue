@@ -11,16 +11,9 @@
           <input type="text" placeholder="Search" >
         </form>
       </div>
-<!--       <div class="categories-slider-wrapper">
-        <div class="category active-cat">Trending</div>
-        <div class="category">Action</div>
-        <div class="category">War</div>
-        <div class="category">Fiction</div>
-        <div class="category">Anime</div>
-      </div> -->
       <div class="header-section">
         <div class="">Trending Now</div>
-        <div class="">Explore</div>
+        <div class="bg-pink-500 py-1 px-2 rounded">Explore</div>
       </div>
       <div class="category-content">
         <ContentPreview v-for="trend in trends.results" :content="trend" :key="trend.id" />
@@ -28,18 +21,18 @@
 
       <div class="header-section">
         <div class="">Action Movies</div>
-        <div class="">Explore</div>
+        <div class="bg-pink-500 py-1 px-2 rounded">Explore</div>
       </div>
       <div class="category-content">
         <ContentPreview v-for="action in actionMovies.results" :content="action" :key="action.id" />
       </div>
 
       <div class="header-section">
-        <div class="">Comedies</div>
-        <div class="">Explore</div>
+        <div class="">Drama</div>
+        <div class="bg-pink-500 py-1 px-2 rounded">Explore</div>
       </div>
       <div class="category-content">
-        <ContentPreview v-for="comedy in comedyMovies.results" :content="comedy" :key="comedy.id" />
+        <ContentPreview v-for="drama in dramas.results" :content="drama" :key="drama.id" />
       </div>
     </div>
   </div>
@@ -53,12 +46,12 @@ export default {
 
     const actionMovies = await $http.$get('https://api.themoviedb.org/3/discover/movie?api_key=a807f0095433ac989503323b5b0bc933&language=en-US&sort_by=popularity.asc&include_adult=false&include_video=false&page=1&with_genres=28');
 
-    const comedyMovies = await $http.$get('https://api.themoviedb.org/3/discover/movie?api_key=a807f0095433ac989503323b5b0bc933&language=en-US&sort_by=popularity.asc&include_adult=false&include_video=false&page=1&with_genres=35');
+    const dramas = await $http.$get('https://api.themoviedb.org/3/discover/movie?api_key=a807f0095433ac989503323b5b0bc933&language=en-US&sort_by=popularity.asc&include_adult=false&include_video=false&page=1&with_genres=10749');
 
     return {
       trends,
       actionMovies,
-      comedyMovies
+      dramas
     }
   }
 }
