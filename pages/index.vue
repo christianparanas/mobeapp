@@ -7,14 +7,24 @@
       </div>
       <div class="search-bar">
         <svg class="search-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" ><path d="M10,18c1.846,0,3.543-0.635,4.897-1.688l4.396,4.396l1.414-1.414l-4.396-4.396C17.365,13.543,18,11.846,18,10 c0-4.411-3.589-8-8-8s-8,3.589-8,8S5.589,18,10,18z M10,4c3.309,0,6,2.691,6,6s-2.691,6-6,6s-6-2.691-6-6S6.691,4,10,4z"></path></svg>
-        <input type="text" placeholder="Search" >
+        <form action="">
+          <input type="text" placeholder="Search" >
+        </form>
       </div>
       <div class="categories-slider-wrapper">
-        <div class="category active-cat">Recommended</div>
+        <div class="category active-cat">Trending</div>
         <div class="category">Action</div>
         <div class="category">War</div>
         <div class="category">Fiction</div>
         <div class="category">Anime</div>
+      </div>
+      <div class="category-content">
+        <div class="cat-con">content</div>
+        <div class="cat-con">content</div>
+        <div class="cat-con">content</div>
+        <div class="cat-con">content</div>
+        <div class="cat-con">content</div>
+        <div class="cat-con">content</div>
       </div>
     </div>
   </div>
@@ -81,6 +91,26 @@ export default {}
           background-color: #6B21A8;
         }
       }
+
+      .category-content {
+        margin-top: 10px;
+        display: flex;
+        flex-direction: row;
+        overflow-x: scroll;
+
+        &::-webkit-scrollbar {
+          width: 0px;  /* Remove scrollbar space */
+          background: transparent;  /* Optional: just make scrollbar invisible */
+        }
+
+        .cat-con {
+          background-color: #1f2937;
+          padding: 10px 20px;
+          border-radius: 5px;
+          height: 140px;
+          margin-right: 10px;
+        }
+      } 
 
     }
   }
