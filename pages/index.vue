@@ -55,7 +55,6 @@ export default {
       padding: 100px 20px 20px;
 
       .search-bar {
-        margin-top: 20px;
 
         .search-icon {
           position: relative;
@@ -101,8 +100,8 @@ export default {
       .category-content {
         margin-top: 10px;
         display: grid;
-        grid-template-columns: repeat(20, 100px);
-        grid-column-gap: 5px;
+        grid-template-columns: repeat(20, 150px);
+        grid-column-gap: 8px;
         overflow-x: scroll;
 
         &::-webkit-scrollbar {
