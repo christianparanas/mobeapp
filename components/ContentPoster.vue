@@ -1,6 +1,8 @@
 <template>
 	<div id="ContentPoster" class="content-poster" v-if="havePoster">
-		<img :src="image" alt="image">
+		<NuxtLink :to="contentpath">
+			<img :src="image" alt="image" @click="mainContent(contentID)">
+		</NuxtLink>
 	</div>
 </template>
 
@@ -11,8 +13,15 @@ export default {
    props: ['content'],
    data() {
    	return {
+   		contentID: this.content.id,
+   		contentpath: "",
    		image: "",
    		havePoster: true
+   	}
+   },
+   methods: {
+   	mainContent(id) {
+   		this.$emit('mainContent', id)
    	}
    },
    mounted() {
@@ -21,6 +30,7 @@ export default {
 		this.havePoster = false
 	} else {
 		this.image = `https://image.tmdb.org/t/p/w342/${this.content.poster_path}`
+		this.contentpath = `/${this.contentID}`
 	}
    }
 }
