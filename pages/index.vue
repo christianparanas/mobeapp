@@ -3,7 +3,7 @@
     <Nav />
     <div class="content">
       <div class="header text-2xl">
-        Find Movies, Tv shows and more ...
+        TMDb data
       </div>
       <div class="search-bar">
         <svg class="search-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" ><path d="M10,18c1.846,0,3.543-0.635,4.897-1.688l4.396,4.396l1.414-1.414l-4.396-4.396C17.365,13.543,18,11.846,18,10 c0-4.411-3.589-8-8-8s-8,3.589-8,8S5.589,18,10,18z M10,4c3.309,0,6,2.691,6,6s-2.691,6-6,6s-6-2.691-6-6S6.691,4,10,4z"></path></svg>
@@ -12,28 +12,36 @@
         </form>
       </div>
       <div class="header-section">
-        <div class="">Trending Now</div>
-        <div class="bg-pink-500 py-1 px-2 rounded">Explore</div>
+        <div class="">Now Playing</div>
+        <div class="">Explore</div>
       </div>
       <div class="category-content">
-        <ContentPoster v-for="trend in trends.results" :content="trend" :key="trend.id" @mainContent="toogleMainContent" />
+        <ContentPoster v-for="nowPlaying in nowPlayingMovies.results" :content="nowPlaying" :key="nowPlaying.id" @mainContent="toogleMainContent" />
+      </div>
+
+<!--       <div class="header-section">
+        <div class="">Popular</div>
+        <div class="">Explore</div>
+      </div>
+      <div class="category-content">
+        <ContentPoster v-for="popular in popularMovies.results" :content="popular" :key="popular.id" @mainContent="toogleMainContent" />
       </div>
 
       <div class="header-section">
-        <div class="">Action Movies</div>
-        <div class="bg-pink-500 py-1 px-2 rounded">Explore</div>
-      </div>
-      <div class="category-content">
-        <ContentPoster v-for="action in actionMovies.results" :content="action" :key="action.id" @mainContent="toogleMainContent" />
-      </div>
-
-      <div class="header-section">
-        <div class="">Drama</div>
-        <div class="bg-pink-500 py-1 px-2 rounded">Explore</div>
+        <div class="">Upcoming Movies</div>
+        <div class="">Explore</div>
       </div>
       <div class="category-content" >
-        <ContentPoster v-for="drama in dramas.results" :content="drama" :key="drama.id" @mainContent="toogleMainContent" />
+        <ContentPoster v-for="upcoming in upcomingMovies.results" :content="upcoming" :key="upcoming.id" @mainContent="toogleMainContent" />
       </div>
+
+      <div class="header-section">
+        <div class="">Top Rated Movies</div>
+        <div class="">Explore</div>
+      </div>
+      <div class="category-content" >
+        <ContentPoster v-for="toprated in topRatedMovies.results" :content="toprated" :key="toprated.id" @mainContent="toogleMainContent" />
+      </div> -->
     </div>
   </div>
 </template>
@@ -42,17 +50,20 @@
 export default {
   name: 'App',
   async asyncData({ $axios }) {
-    const trends = await $axios.$get('https://api.themoviedb.org/3/trending/all/day?api_key=a807f0095433ac989503323b5b0bc933');
-    console.log(trends.results)
+    const nowPlayingMovies = await $axios.$get('https://api.themoviedb.org/3/movie/now_playing?api_key=a807f0095433ac989503323b5b0bc933&language=en-US&page=1');
 
-    const actionMovies = await $axios.$get('https://api.themoviedb.org/3/discover/movie?api_key=a807f0095433ac989503323b5b0bc933&language=en-US&sort_by=popularity.asc&include_adult=false&include_video=false&page=1&with_genres=28');
+    const popularMovies = await $axios.$get('https://api.themoviedb.org/3/movie/popular?api_key=a807f0095433ac989503323b5b0bc933&language=en-US&page=1');
 
-    const dramas = await $axios.$get('https://api.themoviedb.org/3/discover/movie?api_key=a807f0095433ac989503323b5b0bc933&language=en-US&sort_by=popularity.asc&include_adult=false&include_video=false&page=1&with_genres=16');
+    // const actionMovies = await $axios.$get('https://api.themoviedb.org/3/discover/movie?api_key=a807f0095433ac989503323b5b0bc933&language=en-US&sort_by=popularity.asc&include_adult=false&include_video=false&page=1&with_genres=28');
+    const topRatedMovies = await $axios.$get('https://api.themoviedb.org/3/movie/top_rated?api_key=a807f0095433ac989503323b5b0bc933&language=en-US&page=1');
+
+    const upcomingMovies = await $axios.$get('https://api.themoviedb.org/3/movie/upcoming?api_key=a807f0095433ac989503323b5b0bc933&language=en-US&page=1');
 
     return {
-      trends,
-      actionMovies,
-      dramas
+      nowPlayingMovies,
+      popularMovies,
+      topRatedMovies,
+      upcomingMovies
     }
   },
   methods: {

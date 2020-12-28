@@ -1,7 +1,7 @@
 <template>
 	<div id="ContentPoster" class="content-poster" v-if="havePoster">
 		<NuxtLink :to="contentpath">
-			<img :src="image" alt="image" @click="mainContent(contentID)">
+			<img :src="image" alt="" @click="mainContent(contentID)">
 		</NuxtLink>
 	</div>
 </template>
