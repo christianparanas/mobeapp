@@ -1,5 +1,5 @@
 <template>
-	<div id="ContentPreview" class="content-preview" v-if="havePoster">
+	<div id="ContentPoster" class="content-poster" v-if="havePoster">
 		<img :src="image" alt="image">
 	</div>
 </template>
@@ -7,7 +7,7 @@
 
 <script>
 export default {
-   name: 'ContentPreview',
+   name: 'ContentPoster',
    props: ['content'],
    data() {
    	return {

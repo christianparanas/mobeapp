@@ -15,6 +15,13 @@ export default {
     ]
   },
 
+  publicRuntimeConfig: {
+    baseURL: process.env.BASE_URL
+  },
+  privateRuntimeConfig: {
+    apiSecret: process.env.API_SECRET
+  },
+
   // Global CSS (https://go.nuxtjs.dev/config-css)
   css: [
   ],
