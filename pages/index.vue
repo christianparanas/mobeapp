@@ -41,13 +41,13 @@
 <script>
 export default {
   name: 'App',
-  async asyncData({ $http }) {
-    const trends = await $http.$get('https://api.themoviedb.org/3/trending/all/day?api_key=a807f0095433ac989503323b5b0bc933');
-    console.log(trends)
+  async asyncData({ $axios }) {
+    const trends = await $axios.$get('https://api.themoviedb.org/3/trending/all/day?api_key=a807f0095433ac989503323b5b0bc933');
+    console.log(trends.results)
 
-    const actionMovies = await $http.$get('https://api.themoviedb.org/3/discover/movie?api_key=a807f0095433ac989503323b5b0bc933&language=en-US&sort_by=popularity.asc&include_adult=false&include_video=false&page=1&with_genres=28');
+    const actionMovies = await $axios.$get('https://api.themoviedb.org/3/discover/movie?api_key=a807f0095433ac989503323b5b0bc933&language=en-US&sort_by=popularity.asc&include_adult=false&include_video=false&page=1&with_genres=28');
 
-    const dramas = await $http.$get('https://api.themoviedb.org/3/discover/movie?api_key=a807f0095433ac989503323b5b0bc933&language=en-US&sort_by=popularity.asc&include_adult=false&include_video=false&page=1&with_genres=16');
+    const dramas = await $axios.$get('https://api.themoviedb.org/3/discover/movie?api_key=a807f0095433ac989503323b5b0bc933&language=en-US&sort_by=popularity.asc&include_adult=false&include_video=false&page=1&with_genres=16');
 
     return {
       trends,
