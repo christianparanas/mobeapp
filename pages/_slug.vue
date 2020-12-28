@@ -24,6 +24,10 @@
     				<div class="">Runtime</div><div class="">{{ contentData.runtime }}min</div>
     			</div>
     		</div>
+    		<div class="trailer">Trailer</div>
+    		<iframe width="100%" height="280"
+					:src="trailerVideo">
+				</iframe>
     		<div class="casts">
     			<div class="title">
     				<div class="">Cast</div>
@@ -35,9 +39,9 @@
     	</div>
   	</div>
 
-<!--     <NuxtLink to="/">
+    <NuxtLink to="/">
     	<p>Go back</p>
-    </NuxtLink> -->
+    </NuxtLink>
 
   </div>
 </template>
@@ -52,6 +56,8 @@
       const contentBdImg = `https://image.tmdb.org/t/p/w342/${contentData.backdrop_path}`
       const casts = await $axios.$get(`https://api.themoviedb.org/3/movie/${parseInt(params.slug)}/credits?api_key=a807f0095433ac989503323b5b0bc933&language=en-US`)
 
+      const movieTrailer = await $axios.$get(`https://api.themoviedb.org/3/movie/${parseInt(params.slug)}/videos?api_key=a807f0095433ac989503323b5b0bc933&language=en-US`)
+
 
       // filter the array, limit items 10
       let i = 0
@@ -60,14 +66,32 @@
       	topCast.push(casts.cast[i])
       }
 
-      console.log(topCast)
+      const trailer = []
+      for(i = 0; i < 1; i++) {
+      	trailer.push(movieTrailer.results[i])
+      }
 
+      function getId(url) {
+    		var regExp = /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|\&v=)([^#\&\?]*).*/;
+    		var match = url.match(regExp);
+
+    		if (match && match[2].length == 11) {
+        	return match[2];
+    		} else {
+        	return 'error';
+    		}
+			}
+
+      // convert youtube video into youtube embed video by calling the getId function
+      const videoId = getId(`http://www.youtube.com/watch?v=${trailer[0].key}`);
+      const trailerVideo = `https://www.youtube.com/embed/${videoId}`
 
       return { 
       	contentData,
       	contentBdImg,
       	genres,
-      	topCast
+      	topCast,
+      	trailerVideo
       }
     },
   }
@@ -122,7 +146,7 @@
 				}
 
 				.casts {
-					margin-top: 30px;
+					margin-top: 40px;
 
 					.title {
 						font-size: 20px;
@@ -146,7 +170,11 @@
           		background: transparent;
         		}
 					}
+				}
 
+				.trailer {
+						margin: 30px 0 10px 0;
+						font-size: 20px;
 				}
 			}
 		}
