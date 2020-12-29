@@ -2,7 +2,7 @@
   <div class="slug">
     <Nav />
   	<div class="slug-head">
-  		<img :src="contentBdImg" alt="">
+  		<img class="headimg" :src="contentBdImg" alt="">
     	<div class="movie_detail">
     		<h1 class="movie_title">{{ contentData.title }}</h1>
     		<div class="genres-wrapper">
@@ -46,11 +46,6 @@
       </div>
     	</div>
   	</div>
-
-    <NuxtLink to="/">
-    	<p>Go back</p>
-    </NuxtLink>
-
   </div>
 </template>
 <script>
@@ -121,7 +116,7 @@
 
 		.slug-head {
 
-			img {
+			.headimg {
 				width: 100%;
         padding-top: 65px;
 			}
