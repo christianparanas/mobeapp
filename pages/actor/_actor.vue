@@ -12,7 +12,7 @@
 			<div class="actor__movies">
 				<div class="title">Movies of <span>{{ actorDetails.name }}</span></div>
 				<div class="actorMoviesWrapper">
-					<ContentPoster v-for="actormovie in actorMovies.cast" :content="actormovie" :key="actormovie.id" @mainContent="toogleMainContent" />
+					<ContentPoster v-for="topmovie in topMovies" :content="topmovie" :key="topmovie.id" @mainContent="toogleMainContent" />
 				</div>
 			</div>
 
@@ -33,12 +33,20 @@
 			const actorMovies = await $axios.$get(`https://api.themoviedb.org/3/person/${parseInt(params.actor)}/movie_credits?api_key=a807f0095433ac989503323b5b0bc933&language=en-US`);
 			
 
-			console.log(actorMovies.cast)
+			let i = 0
+      const topMovies = []
+      for(i; i < 20; i++) {
+      	topMovies.push(actorMovies.cast[i])
+      }
+
+      console.log(topMovies)
+
+
 
 			return {
 				actorDetails,
 				actorProfileImg,
-				actorMovies
+				topMovies
 			}
 		},
 		methods: {
@@ -99,7 +107,7 @@
 				.actorMoviesWrapper {
 					margin-top: 10px;
 		  		display: grid;
-		  		grid-template-columns: repeat(100, 150px);
+		  		grid-template-columns: repeat(1000, 150px);
 		  		grid-column-gap: 8px;
 		  		overflow-x: scroll;
 
