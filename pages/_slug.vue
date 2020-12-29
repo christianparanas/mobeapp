@@ -31,7 +31,6 @@
     		<div class="casts">
     			<div class="title">
     				<div class="">Cast</div>
-    			</div>
     			<div class="castPosterWrapper">
     				<CastPoster v-for="cast in topCast" :content="cast" :key="cast.cast_id" />
     			</div>
@@ -61,7 +60,7 @@
 
       const genres = contentData.genres
 
-      const contentBdImg = `https://image.tmdb.org/t/p/w342/${contentData.poster_path}`
+      const contentBdImg = `https://image.tmdb.org/t/p/w342/${contentData.backdrop_path}`
 
       const casts = await $axios.$get(`https://api.themoviedb.org/3/movie/${parseInt(params.slug)}/credits?api_key=a807f0095433ac989503323b5b0bc933&language=en-US`)
 
