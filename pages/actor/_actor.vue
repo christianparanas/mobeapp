@@ -1,5 +1,6 @@
 <template>
 	<div class="actor">
+		<Nav />
 		<img :src="actorProfileImg" alt="">
 		<div class="actor__details">
 			<div class="actor__name shadow">{{ actorDetails.name }}</div>

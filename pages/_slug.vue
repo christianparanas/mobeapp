@@ -1,5 +1,6 @@
 <template>
   <div class="slug">
+    <Nav />
   	<div class="slug-head">
   		<img :src="contentBdImg" alt="">
     	<div class="movie_detail">
@@ -25,12 +26,13 @@
     			</div>
     		</div>
     		<div class="trailer">Trailer</div>
-    		<iframe width="100%" height="280"
+    		<iframe width="100%" height="250"
 					:src="trailerVideo">
 				</iframe>
     		<div class="casts">
     			<div class="title">
     				<div class="">Cast</div>
+          </div>
     			<div class="castPosterWrapper">
     				<CastPoster v-for="cast in topCast" :content="cast" :key="cast.cast_id" />
     			</div>
@@ -163,9 +165,8 @@
 					margin-top: 40px;
 
 					.title {
-						font-size: 20px;
-						display: flex;
-						justify-content: space-between;
+						font-size: 15px;
+            color: orange;
 
 						.movie__see_all_cast {
 							color: orange;
@@ -190,7 +191,8 @@
           margin-top: 40px;
 
           .title {
-
+            font-size: 15px;
+            color: orange;
           }
 
           .simillarMoviesWrapper {
@@ -209,7 +211,8 @@
 
 				.trailer {
 						margin: 30px 0 10px 0;
-						font-size: 20px;
+						font-size: 15px;
+            color: orange;
 				}
 			}
 		}
