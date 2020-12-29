@@ -12,7 +12,7 @@
 			<div class="actor__movies">
 				<div class="title">Movies of <span>{{ actorDetails.name }}</span></div>
 				<div class="actorMoviesWrapper">
-					<ContentPoster v-for="topmovie in topMovies" :content="topmovie" :key="topmovie.id" @mainContent="toogleMainContent" />
+					<ContentPoster v-for="actormovie in actorMovies.cast" :content="actormovie" :key="actormovie.id" />
 				</div>
 			</div>
 
@@ -28,30 +28,24 @@
 			// get actor credential by params id
 			const actorDetails = await $axios.$get(`https://api.themoviedb.org/3/person/${parseInt(params.actor)}?api_key=a807f0095433ac989503323b5b0bc933&language=en-US`)
 
-			const actorProfileImg = `https://image.tmdb.org/t/p/w342${actorDetails.profile_path}`
-
 			const actorMovies = await $axios.$get(`https://api.themoviedb.org/3/person/${parseInt(params.actor)}/movie_credits?api_key=a807f0095433ac989503323b5b0bc933&language=en-US`);
 			
+			const actorProfileImg = `https://image.tmdb.org/t/p/w342${actorDetails.profile_path}`
 
-			let i = 0
-      const topMovies = []
-      for(i; i < 20; i++) {
-      	topMovies.push(actorMovies.cast[i])
-      }
+			// limit the actorMovies array
+      // const topMovies = []
+      // for(let i = 0; i < 20; i++) {
+      // 	topMovies.push(actorMovies.cast[i])
+      // }
 
-      console.log(topMovies)
+      // console.log(topMovies)
 
 			return {
 				actorDetails,
 				actorProfileImg,
-				topMovies
+				actorMovies
 			}
 		},
-		methods: {
-    	toogleMainContent(id) {
-     		console.log(`ID: ${id}`)
-    	}
-  	}
 	}
 </script>
 

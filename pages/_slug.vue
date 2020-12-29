@@ -34,7 +34,7 @@
     				<div class="">Cast</div>
           </div>
     			<div class="castPosterWrapper">
-    				<CastPoster v-for="cast in topCast" :content="cast" :key="cast.cast_id" />
+    				<CastPoster v-for="cast in casts.cast" :content="cast" :key="cast.cast_id" />
     			</div>
     		</div>
 
@@ -53,29 +53,33 @@
   	// getting the params id and use it to fetch specific data from tmdb
     async asyncData({ params, $axios }) {
 
-      const contentData = await $axios.$get(`https://api.themoviedb.org/3/movie/${parseInt(params.slug)}?api_key=a807f0095433ac989503323b5b0bc933&language=en-US`)
+      let contentData = await $axios.$get(`https://api.themoviedb.org/3/movie/${parseInt(params.slug)}?api_key=a807f0095433ac989503323b5b0bc933&language=en-US`)
 
-      const genres = contentData.genres
+      let genres = contentData.genres
 
-      const contentBdImg = `https://image.tmdb.org/t/p/w342/${contentData.backdrop_path}`
+      let contentBdImg = `https://image.tmdb.org/t/p/w342/${contentData.backdrop_path}`
 
-      const casts = await $axios.$get(`https://api.themoviedb.org/3/movie/${parseInt(params.slug)}/credits?api_key=a807f0095433ac989503323b5b0bc933&language=en-US`)
+      let casts = await $axios.$get(`https://api.themoviedb.org/3/movie/${parseInt(params.slug)}/credits?api_key=a807f0095433ac989503323b5b0bc933&language=en-US`)
 
-      const movieTrailer = await $axios.$get(`https://api.themoviedb.org/3/movie/${parseInt(params.slug)}/videos?api_key=a807f0095433ac989503323b5b0bc933&language=en-US`)
+      let movieTrailer = await $axios.$get(`https://api.themoviedb.org/3/movie/${parseInt(params.slug)}/videos?api_key=a807f0095433ac989503323b5b0bc933&language=en-US`)
 
-      const simillarMovies = await $axios.$get(`https://api.themoviedb.org/3/movie/${parseInt(params.slug)}/similar?api_key=a807f0095433ac989503323b5b0bc933&language=en-US&page=1`);
+      let simillarMovies = await $axios.$get(`https://api.themoviedb.org/3/movie/${parseInt(params.slug)}/similar?api_key=a807f0095433ac989503323b5b0bc933&language=en-US&page=1`);
 
-
-      // filter the array, limit items 10
-      let i = 0
-      const topCast = []
-      for(i; i < 10; i++) {
-      	topCast.push(casts.cast[i])
-      }
-
+      // declaring variables
       const trailer = []
-      for(i = 0; i < 1; i++) {
-      	trailer.push(movieTrailer.results[i])
+      let trailerVideo = ""
+      let videoId = ""
+      let i = 0
+
+      // checks if the trailer array has a content, if dont, just ignored
+      if(!movieTrailer.results.length == 0) {
+        for(i = 0; i < 1; i++) {
+          trailer.push(movieTrailer.results[i])
+        }
+
+        // convert youtube video into youtube embed video by calling the getId function
+        videoId = getId(`http://www.youtube.com/watch?v=${trailer[0].key}`) || getId(`http://www.youtube.com/watch?v=${trailer[0].key}`);
+        trailerVideo = `https://www.youtube.com/embed/${videoId}`
       }
 
       // function that converts youtube watch into embed
@@ -89,20 +93,14 @@
         	return 'error';
     		}
 			}
-
-      // convert youtube video into youtube embed video by calling the getId function
-      const videoId = getId(`http://www.youtube.com/watch?v=${trailer[0].key}`) || getId(`http://www.youtube.com/watch?v=${trailer[0].key}`);
-      const trailerVideo = `https://www.youtube.com/embed/${videoId}`
-
-      console.log(topCast)
-
+      
       return { 
       	contentData,
       	contentBdImg,
       	genres,
-      	topCast,
+      	casts,
       	trailerVideo,
-        simillarMovies
+        simillarMovies,
       }
     },
   }

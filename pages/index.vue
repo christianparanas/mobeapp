@@ -31,7 +31,7 @@
         <div class="">Explore</div>
       </div>
       <div class="category-content">
-        <ContentPoster v-for="nowPlaying in nowPlayingMovies.results" :content="nowPlaying" :key="nowPlaying.id" @mainContent="toogleMainContent" />
+        <ContentPoster v-for="nowPlaying in nowPlayingMovies.results" :content="nowPlaying" :key="nowPlaying.id" />
       </div>
 
       <div class="header-section">
@@ -39,7 +39,7 @@
         <div class="">Explore</div>
       </div>
       <div class="category-content">
-        <ContentPoster v-for="popular in popularMovies.results" :content="popular" :key="popular.id" @mainContent="toogleMainContent" />
+        <ContentPoster v-for="popular in popularMovies.results" :content="popular" :key="popular.id" />
       </div>
 
       <div class="header-section">
@@ -47,7 +47,7 @@
         <div class="">Explore</div>
       </div>
       <div class="category-content" >
-        <ContentPoster v-for="upcoming in upcomingMovies.results" :content="upcoming" :key="upcoming.id" @mainContent="toogleMainContent" />
+        <ContentPoster v-for="upcoming in upcomingMovies.results" :content="upcoming" :key="upcoming.id" />
       </div>
 
       <div class="header-section">
@@ -55,7 +55,7 @@
         <div class="">Explore</div>
       </div>
       <div class="category-content" >
-        <ContentPoster v-for="toprated in topRatedMovies.results" :content="toprated" :key="toprated.id" @mainContent="toogleMainContent" />
+        <ContentPoster v-for="toprated in topRatedMovies.results" :content="toprated" :key="toprated.id" />
       </div>
     </div>
   </div>
@@ -112,21 +112,21 @@ export default {
     }
   },
   methods: {
-    toogleMainContent(id) {
-      console.log(`ID: ${id}`)
-    },
     async fetchSearchResults() {
+      // showing the spinner in the input
       this.showSpinner = true
 
+      // checks if the input have content, if it has do the command inside if
       if(!this.searchQuery == '') {
         const result = await this.$axios.$get(`https://api.themoviedb.org/3/search/movie?api_key=a807f0095433ac989503323b5b0bc933&language=en-US&query=${this.searchQuery}&page=1&include_adult=false`);
         this.results = result
-        console.log(this.results)
       }
     },
     dynaImg(poster_path) {
         return `https://image.tmdb.org/t/p/w342/${poster_path}`
     },
+
+    // formatting the movie id so that it can be used in dynamic page
     searchItemId(contentID) {
       return `/${contentID}`
     }
