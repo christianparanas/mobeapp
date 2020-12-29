@@ -7,9 +7,18 @@
       </div>
       <div class="search-bar">
         <svg class="search-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" ><path d="M10,18c1.846,0,3.543-0.635,4.897-1.688l4.396,4.396l1.414-1.414l-4.396-4.396C17.365,13.543,18,11.846,18,10 c0-4.411-3.589-8-8-8s-8,3.589-8,8S5.589,18,10,18z M10,4c3.309,0,6,2.691,6,6s-2.691,6-6,6s-6-2.691-6-6S6.691,4,10,4z"></path></svg>
-        <form action="">
-          <input type="text" placeholder="Search" >
+        <form action="" @submit.prevent="fetchSearchResults">
+          <input type="text" placeholder="Search" v-model="searchQuery">
         </form>
+      </div>
+      <div class="search-results-wrapper" v-if="searchResultbool">
+        <div class="result" v-for="result in results.results" :key="result.id">
+          <img :src="dynaImg(result.poster_path)" alt="">
+          <div class="result_title">
+            <div class="">{{ result.title }}</div>
+            <div class="searchRating">Rating: <span>{{ result.vote_average }}</span></div>
+          </div>
+        </div>
       </div>
       <div class="header-section">
         <div class="">Now Playing</div>
@@ -19,7 +28,7 @@
         <ContentPoster v-for="nowPlaying in nowPlayingMovies.results" :content="nowPlaying" :key="nowPlaying.id" @mainContent="toogleMainContent" />
       </div>
 
-<!--       <div class="header-section">
+      <div class="header-section">
         <div class="">Popular</div>
         <div class="">Explore</div>
       </div>
@@ -41,7 +50,7 @@
       </div>
       <div class="category-content" >
         <ContentPoster v-for="toprated in topRatedMovies.results" :content="toprated" :key="toprated.id" @mainContent="toogleMainContent" />
-      </div> -->
+      </div>
     </div>
   </div>
 </template>
@@ -49,15 +58,16 @@
 <script>
 export default {
   name: 'App',
+
   async asyncData({ $axios }) {
     const nowPlayingMovies = await $axios.$get('https://api.themoviedb.org/3/movie/now_playing?api_key=a807f0095433ac989503323b5b0bc933&language=en-US&page=1');
 
     const popularMovies = await $axios.$get('https://api.themoviedb.org/3/movie/popular?api_key=a807f0095433ac989503323b5b0bc933&language=en-US&page=1');
 
-    // const actionMovies = await $axios.$get('https://api.themoviedb.org/3/discover/movie?api_key=a807f0095433ac989503323b5b0bc933&language=en-US&sort_by=popularity.asc&include_adult=false&include_video=false&page=1&with_genres=28');
     const topRatedMovies = await $axios.$get('https://api.themoviedb.org/3/movie/top_rated?api_key=a807f0095433ac989503323b5b0bc933&language=en-US&page=1');
 
     const upcomingMovies = await $axios.$get('https://api.themoviedb.org/3/movie/upcoming?api_key=a807f0095433ac989503323b5b0bc933&language=en-US&page=1');
+
 
     return {
       nowPlayingMovies,
@@ -66,15 +76,46 @@ export default {
       upcomingMovies
     }
   },
+  data() {
+    return {
+      searchResultbool: false,
+      searchQuery: '',
+      results: []
+    }
+  },
+  watch: {
+    results() {
+      if(this.results == []) {
+        this.searchResultbool = false
+      }
+      else {
+        this.searchResultbool = true
+      }
+    },
+    searchQuery() {
+      if(this.searchQuery == '') {
+        this.searchResultbool = false
+      }
+    }
+  },
   methods: {
     toogleMainContent(id) {
       console.log(`ID: ${id}`)
+    },
+    async fetchSearchResults() {
+      if(!this.searchQuery == '') {
+        const result = await this.$axios.$get(`https://api.themoviedb.org/3/search/movie?api_key=a807f0095433ac989503323b5b0bc933&language=en-US&query=${this.searchQuery}&page=1&include_adult=false`);
+        this.results = result
+        console.log(this.results)
+      }
+    },
+    dynaImg(poster_path) {
+        return `https://image.tmdb.org/t/p/w342/${poster_path}`
     }
   }
 }
 </script>
 
-<!-- https://api.themoviedb.org/3/trending/all/day?api_key=a807f0095433ac989503323b5b0bc933 -->
 
 <style lang="scss">
   body {
@@ -107,6 +148,37 @@ export default {
           background-color: #1f2937;
           outline: none;
           color: #a0aec0;
+        }
+      }
+
+      .search-results-wrapper {
+        position: absolute;
+        background-color: #1f2937;
+        width: 90%;
+        top: 220px;
+        padding: 20px;
+        border-radius: 8px;
+        height: 400px;
+        overflow-y: scroll;
+
+        .result {
+          display: grid;
+          grid-template-columns: 60px 1fr;
+          margin-bottom: 10px;
+
+          .result_title {
+            padding: 20px 0;
+            text-align: left;
+            margin-left: 20px;
+
+            .searchRating {
+              font-size: 13px;
+
+              span {
+                color: orange;
+              }
+            }
+          }
         }
       }
 
