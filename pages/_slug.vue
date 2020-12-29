@@ -71,6 +71,7 @@
       	trailer.push(movieTrailer.results[i])
       }
 
+      // function that converts youtube watch into embed
       function getId(url) {
     		var regExp = /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|\&v=)([^#\&\?]*).*/;
     		var match = url.match(regExp);
@@ -85,6 +86,8 @@
       // convert youtube video into youtube embed video by calling the getId function
       const videoId = getId(`http://www.youtube.com/watch?v=${trailer[0].key}`);
       const trailerVideo = `https://www.youtube.com/embed/${videoId}`
+
+      console.log(topCast)
 
       return { 
       	contentData,

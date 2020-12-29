@@ -29,7 +29,7 @@ export default {
 	if(this.content.poster_path == null) {
 		this.havePoster = false
 	} else {
-		this.image = `https://image.tmdb.org/t/p/w342/${this.content.poster_path}`
+		this.image = `https://image.tmdb.org/t/p/w342${this.content.poster_path}`
 		this.contentpath = `/${this.contentID}`
 	}
    }

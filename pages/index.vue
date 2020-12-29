@@ -19,7 +19,7 @@
         <ContentPoster v-for="nowPlaying in nowPlayingMovies.results" :content="nowPlaying" :key="nowPlaying.id" @mainContent="toogleMainContent" />
       </div>
 
-      <div class="header-section">
+<!--       <div class="header-section">
         <div class="">Popular</div>
         <div class="">Explore</div>
       </div>
@@ -41,7 +41,7 @@
       </div>
       <div class="category-content" >
         <ContentPoster v-for="toprated in topRatedMovies.results" :content="toprated" :key="toprated.id" @mainContent="toogleMainContent" />
-      </div>
+      </div> -->
     </div>
   </div>
 </template>
