@@ -14,6 +14,7 @@
 					<ContentPoster v-for="actormovie in actorMovies.cast" :content="actormovie" :key="actormovie.id" @mainContent="toogleMainContent" />
 				</div>
 			</div>
+
 		</div>
 	</div>
 </template>
@@ -29,7 +30,6 @@
 			const actorProfileImg = `https://image.tmdb.org/t/p/w342${actorDetails.profile_path}`
 
 			const actorMovies = await $axios.$get(`https://api.themoviedb.org/3/person/${parseInt(params.actor)}/movie_credits?api_key=a807f0095433ac989503323b5b0bc933&language=en-US`);
-
 			
 
 			console.log(actorMovies.cast)
@@ -98,7 +98,7 @@
 				.actorMoviesWrapper {
 					margin-top: 10px;
 		  		display: grid;
-		  		grid-template-columns: repeat(50, 150px);
+		  		grid-template-columns: repeat(100, 150px);
 		  		grid-column-gap: 8px;
 		  		overflow-x: scroll;
 

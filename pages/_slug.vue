@@ -31,11 +31,18 @@
     		<div class="casts">
     			<div class="title">
     				<div class="">Cast</div>
-    				<div class="movie__see_all_cast">See All</div></div>
+    			</div>
     			<div class="castPosterWrapper">
     				<CastPoster v-for="cast in topCast" :content="cast" :key="cast.cast_id" />
     			</div>
     		</div>
+
+        <div class="simillar__movies">
+          <div class="title">Simillar Movies</div>
+          <div class="simillarMoviesWrapper">
+            <ContentPoster v-for="simillarmovie in simillarMovies.results" :content="simillarmovie" :key="simillarmovie.id" />
+        </div>
+      </div>
     	</div>
   	</div>
 
@@ -53,10 +60,14 @@
       const contentData = await $axios.$get(`https://api.themoviedb.org/3/movie/${parseInt(params.slug)}?api_key=a807f0095433ac989503323b5b0bc933&language=en-US`)
 
       const genres = contentData.genres
-      const contentBdImg = `https://image.tmdb.org/t/p/w342/${contentData.backdrop_path}`
+
+      const contentBdImg = `https://image.tmdb.org/t/p/w342/${contentData.poster_path}`
+
       const casts = await $axios.$get(`https://api.themoviedb.org/3/movie/${parseInt(params.slug)}/credits?api_key=a807f0095433ac989503323b5b0bc933&language=en-US`)
 
       const movieTrailer = await $axios.$get(`https://api.themoviedb.org/3/movie/${parseInt(params.slug)}/videos?api_key=a807f0095433ac989503323b5b0bc933&language=en-US`)
+
+      const simillarMovies = await $axios.$get(`https://api.themoviedb.org/3/movie/${parseInt(params.slug)}/similar?api_key=a807f0095433ac989503323b5b0bc933&language=en-US&page=1`);
 
 
       // filter the array, limit items 10
@@ -94,7 +105,8 @@
       	contentBdImg,
       	genres,
       	topCast,
-      	trailerVideo
+      	trailerVideo,
+        simillarMovies
       }
     },
   }
@@ -164,7 +176,7 @@
 					.castPosterWrapper {
 						margin-top: 10px;
         		display: grid;
-        		grid-template-columns: repeat(20, 150px);
+        		grid-template-columns: repeat(100, 150px);
         		grid-column-gap: 8px;
         		overflow-x: scroll;
 
@@ -174,6 +186,27 @@
         		}
 					}
 				}
+
+        .simillar__movies {
+          margin-top: 40px;
+
+          .title {
+
+          }
+
+          .simillarMoviesWrapper {
+            margin-top: 10px;
+            display: grid;
+            grid-template-columns: repeat(100, 150px);
+            grid-column-gap: 8px;
+            overflow-x: scroll;
+
+            &::-webkit-scrollbar {
+              width: 0px;
+              background: transparent;
+            }
+          }
+        }
 
 				.trailer {
 						margin: 30px 0 10px 0;
