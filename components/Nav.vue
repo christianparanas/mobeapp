@@ -25,6 +25,8 @@
 		display: grid;
 		grid-template-columns: 1fr 1fr 1fr;
 		padding: 20px;
+		background-color: #091a28;
+		opacity: .8;
 
 		.nv1 {
 			fill: #fff;

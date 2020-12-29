@@ -41,8 +41,6 @@
 
       console.log(topMovies)
 
-
-
 			return {
 				actorDetails,
 				actorProfileImg,

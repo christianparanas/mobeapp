@@ -96,7 +96,7 @@
 			}
 
       // convert youtube video into youtube embed video by calling the getId function
-      const videoId = getId(`http://www.youtube.com/watch?v=${trailer[0].key}`);
+      const videoId = getId(`http://www.youtube.com/watch?v=${trailer[0].key}`) || getId(`http://www.youtube.com/watch?v=${trailer[0].key}`);
       const trailerVideo = `https://www.youtube.com/embed/${videoId}`
 
       console.log(topCast)
@@ -123,6 +123,7 @@
 
 			img {
 				width: 100%;
+        padding-top: 65px;
 			}
 
 			.movie_detail {
@@ -132,7 +133,7 @@
 					font-size: 30px;
 					width: fit-content;
 					position: relative;
-					top: -30px;
+					top: -10px;
 				}
 
 
@@ -140,7 +141,7 @@
 					display: flex;
 					flex-direction: row;
 					position: relative;
-					top: -25px;
+					top: -15px;
 
 					.genres {
 						margin-right: 10px;
@@ -151,6 +152,7 @@
 
 				.overview {
 					font-size: 13px;
+          margin-top: 10px;
 				}
 
 				.mini-infos {
