@@ -53,8 +53,9 @@
 <style lang="scss">
 	.actor {
 		width: 100%;
-    background-color: #091a28;
-    color: #fff;
+    	background-color: #091a28;
+    	color: #fff;
+    	z-index: -1;
 
 		img {
 			width: 100%;
@@ -66,6 +67,7 @@
 			.actor__name {
 				position: relative;
 				top: -30px;
+				z-index: 1;
 				font-size: 35px;
 				background-color: #1f2937;
 				width: fit-content;

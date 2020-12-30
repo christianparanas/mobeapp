@@ -120,6 +120,7 @@
 
 <style lang="scss">
 	.slug {
+    z-index: 1;
 		width: 100%;
     background-color: #091a28;
     color: #fff;
@@ -137,16 +138,12 @@
 				.movie_title {
 					font-size: 30px;
 					width: fit-content;
-					position: relative;
-					top: -10px;
 				}
 
 
 				.genres-wrapper {
 					display: flex;
 					flex-direction: row;
-					position: relative;
-					top: -15px;
 
 					.genres {
 						margin-right: 10px;
@@ -157,7 +154,7 @@
 
 				.overview {
 					font-size: 13px;
-          margin-top: 10px;
+          margin-top: 20px;
 				}
 
 				.mini-infos {
