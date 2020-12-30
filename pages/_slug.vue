@@ -180,7 +180,7 @@
 					.castPosterWrapper {
 						margin-top: 10px;
         		display: grid;
-        		grid-template-columns: repeat(100, 150px);
+        		grid-template-columns: repeat(200, 150px);
         		grid-column-gap: 8px;
         		overflow-x: scroll;
 
