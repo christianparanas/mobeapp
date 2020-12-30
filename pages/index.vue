@@ -121,6 +121,8 @@ export default {
       if(!this.searchQuery == '') {
         const result = await this.$axios.$get(`https://api.themoviedb.org/3/search/movie?api_key=a807f0095433ac989503323b5b0bc933&language=en-US&query=${this.searchQuery}&page=1&include_adult=false`);
         this.results = result
+      } else {
+        this.showSpinner = false
       }
     },
     dynaImg(poster_path) {
@@ -158,8 +160,8 @@ export default {
 
         .spinner {
           position: absolute;
-          top: 38px;
-          right: 0;
+          top: 174px;
+          right: 21px;
         }
 
         .search-icon {
