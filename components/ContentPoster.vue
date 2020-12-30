@@ -44,7 +44,7 @@ export default {
 	.skeleton {
 		width: 100%;
 		background-color: #1f2937; 
-		height: 222px;
+      height: 222px;
 	}
 
 	

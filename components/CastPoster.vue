@@ -2,7 +2,6 @@
 	<div id="CastPoster" class="" v-if="havePoster">
 		<NuxtLink :to="actorId">
 			<img :src="image" alt="">
-			<div class="name">{{ content.name }}</div>
 		</NuxtLink>
 		<div v-if="showSkel" class="skeleton animate-pulse"></div>
 	</div>
@@ -42,8 +41,8 @@
 <style>
 	.skeleton {
 		width: 100%;
-		background-color: white;
-		height: 222px;
+		background-color: #1f2937; 
+    height: 222px;
 	}
 	
 </style>
