@@ -50,6 +50,7 @@
 </template>
 <script>
   export default {
+    transition: 'home',
   	// getting the params id and use it to fetch specific data from tmdb
     async asyncData({ params, $axios }) {
 

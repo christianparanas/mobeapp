@@ -3,6 +3,7 @@
 		<NuxtLink :to="contentpath">
 			<img :src="image" alt="">
 		</NuxtLink>
+		<div v-if="showSkel" class="skeleton animate-pulse"></div>
 	</div>
 </template>
 
@@ -15,7 +16,8 @@ export default {
    	return {
    		contentpath: "",
    		image: "",
-   		havePoster: true
+   		havePoster: true,
+   		showSkel: true
    	}
    },
    mounted() {
@@ -26,12 +28,24 @@ export default {
 		this.image = `https://image.tmdb.org/t/p/w342${this.content.poster_path}`
 		this.contentpath = `/${this.content.id}`
 	}
+   },
+   watch: {
+   	image() {
+   		if(!this.image == "") {
+   			this.showSkel = false
+   		}
+   	}
    }
 }
 </script>
 
 
 <style lang="scss" scoped>
+	.skeleton {
+		width: 100%;
+		background-color: #1f2937; 
+		height: 222px;
+	}
 
 	
 </style>

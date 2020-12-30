@@ -64,6 +64,7 @@
 <script>
 export default {
   name: 'App',
+  transition: 'home',
 
   async asyncData({ $axios }) {
     const nowPlayingMovies = await $axios.$get('https://api.themoviedb.org/3/movie/now_playing?api_key=a807f0095433ac989503323b5b0bc933&language=en-US&page=1');
@@ -141,6 +142,9 @@ export default {
     background-color: #091a28;
     color: #fff;
   }
+
+  .home-enter-active, .home-leave-active { transition: opacity .3s; }
+  .home-enter, .home-leave-active { opacity: 0; }
 
   .container {
     width: 100%;

@@ -15,7 +15,6 @@
 					<ContentPoster v-for="actormovie in actorMovies.cast" :content="actormovie" :key="actormovie.id" />
 				</div>
 			</div>
-
 		</div>
 	</div>
 </template>
@@ -23,6 +22,7 @@
 
 <script>
 	export default {
+		transition: 'home',
 		async asyncData({ params, $axios }) {
 
 			// get actor credential by params id
