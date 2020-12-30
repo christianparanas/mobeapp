@@ -192,7 +192,7 @@
 				}
 
         .simillar__movies {
-          margin: 40 0;
+          margin: 40px 0;
 
           .title {
             font-size: 15px;
