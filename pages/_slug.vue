@@ -25,7 +25,7 @@
     				<div class="">Runtime</div><div class="">{{ contentData.runtime }}min</div>
     			</div>
     		</div>
-    		<div class="trailer">Trailer</div>
+    		<div class="trailer" v-if="haveTrailer">Trailer</div>
     		<iframe width="100%" height="250"
 					:src="trailerVideo">
 				</iframe>
@@ -38,7 +38,7 @@
     			</div>
     		</div>
 
-        <div class="simillar__movies">
+        <div class="simillar__movies" v-if="haveSimillar">
           <div class="title">Simillar Movies</div>
           <div class="simillarMoviesWrapper">
             <ContentPoster v-for="simillarmovie in simillarMovies.results" :content="simillarmovie" :key="simillarmovie.id" />
@@ -72,6 +72,13 @@
       let videoId = ""
       let i = 0
 
+      let haveSimillar = true
+      // check if the movie have simillar movies
+      if(simillarMovies.results.length == 0) {
+        haveSimillar = false
+      }
+
+      let haveTrailer = true
       // checks if the trailer array has a content, if dont, just ignored
       if(!movieTrailer.results.length == 0) {
         for(i = 0; i < 1; i++) {
@@ -81,6 +88,8 @@
         // convert youtube video into youtube embed video by calling the getId function
         videoId = getId(`http://www.youtube.com/watch?v=${trailer[0].key}`) || getId(`http://www.youtube.com/watch?v=${trailer[0].key}`);
         trailerVideo = `https://www.youtube.com/embed/${videoId}`
+      } else {
+        haveTrailer = false
       }
 
       // function that converts youtube watch into embed
@@ -102,6 +111,8 @@
       	casts,
       	trailerVideo,
         simillarMovies,
+        haveSimillar,
+        haveTrailer
       }
     },
   }
