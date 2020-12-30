@@ -34,7 +34,7 @@
         <ContentPoster v-for="nowPlaying in nowPlayingMovies.results" :content="nowPlaying" :key="nowPlaying.id" />
       </div>
 
-      <div class="header-section">
+<!--       <div class="header-section">
         <div class="">Popular</div>
         <div class="">Explore</div>
       </div>
@@ -56,7 +56,7 @@
       </div>
       <div class="category-content" >
         <ContentPoster v-for="toprated in topRatedMovies.results" :content="toprated" :key="toprated.id" />
-      </div>
+      </div> -->
     </div>
   </div>
 </template>
@@ -154,7 +154,7 @@ export default {
       padding: 100px 20px 20px;
 
       .search-bar {
-        position: relative;
+        z-index: 2;
 
         .spinner {
           position: absolute;
