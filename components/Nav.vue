@@ -131,8 +131,8 @@
 			}
 
 			.navmenufoot {
-				position: absolute;
-				bottom: 0;
+				position: relative;
+				bottom: -60vh;
 				padding: 20px;
 				width: 100%;
 				text-align: center;
