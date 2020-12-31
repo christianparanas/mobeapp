@@ -36,7 +36,6 @@ export default {
 
   pwa: {
    manifest: {
-      display: 'browser',
       name: 'IMDb',
       background_color: '#091a28'
     }
