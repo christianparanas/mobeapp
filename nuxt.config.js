@@ -34,9 +34,11 @@ export default {
     '@nuxtjs/pwa',
   ],
 
-  pw: {
+  pwa: {
    manifest: {
-      display: 'browser'
+      display: 'browser',
+      name: 'IMDb',
+      background_color: '#091a28'
     }
   },
 
