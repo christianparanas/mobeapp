@@ -4,7 +4,7 @@ export default {
 
   // Global page headers (https://go.nuxtjs.dev/config-head)
   head: {
-    title: 'movieapp',
+    title: 'imdb',
     meta: [
       { charset: 'utf-8' },
       { name: 'viewport', content: 'width=device-width, initial-scale=1' },
@@ -33,6 +33,12 @@ export default {
     '@nuxtjs/tailwindcss',
     '@nuxtjs/pwa',
   ],
+
+  pw: {
+   manifest: {
+      display: 'browser'
+    }
+  },
 
   // Modules (https://go.nuxtjs.dev/config-modules)
   modules: [
