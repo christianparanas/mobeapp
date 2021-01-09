@@ -1,5 +1,3 @@
-# movieapp
-
 ## Build Setup
 
 ```bash
