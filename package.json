@@ -12,7 +12,7 @@
     "@nuxt/http": "^0.6.4",
     "@nuxtjs/axios": "^5.13.1",
     "core-js": "^3.9.0",
-    "nuxt": "^2.15.1",
+    "nuxt": "^2.15.2",
     "v-click-outside": "^3.1.2",
     "vue-loading-skeleton": "^1.1.9",
     "vue-youtube-embed": "^2.2.2"
