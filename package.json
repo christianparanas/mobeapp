@@ -19,7 +19,7 @@
   },
   "devDependencies": {
     "@nuxtjs/pwa": "^3.3.5",
-    "@nuxtjs/tailwindcss": "^4.0.1",
+    "@nuxtjs/tailwindcss": "^4.0.2",
     "fibers": "^5.0.0",
     "sass": "^1.32.8",
     "sass-loader": "^10.1.0"
