@@ -32,14 +32,6 @@
 			
 			const actorProfileImg = `https://image.tmdb.org/t/p/w342${actorDetails.profile_path}`
 
-			// limit the actorMovies array
-      // const topMovies = []
-      // for(let i = 0; i < 20; i++) {
-      // 	topMovies.push(actorMovies.cast[i])
-      // }
-
-      // console.log(topMovies)
-
 			return {
 				actorDetails,
 				actorProfileImg,
