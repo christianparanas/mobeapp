@@ -21,7 +21,7 @@
     "@nuxtjs/pwa": "^3.3.5",
     "@nuxtjs/tailwindcss": "^5.0.0",
     "fibers": "^5.0.0",
-    "sass": "^1.49.9",
+    "sass": "^1.52.2",
     "sass-loader": "^12.6.0"
   }
 }
